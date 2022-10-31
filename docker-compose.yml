@@ -24,22 +24,21 @@ services:
   #     - PG_URL=${PG_URL}
   #     - TZ=America/Los_Angeles
 
-  # directory:
-  #   build:
-  #     context: ./directory
-  #     target: dev
-  #   restart: always
-  #   environment:
-  #     - PORT=${PORT}
-  #     - BULL_URL=${BULL_URL}
-  #     - PG_URL=${PG_URL}
-  #   env_file:
-  #     - ./env/directory.env
-  #   volumes:
-  #     - ./directory:/src
-  #   ports:
-  #     - ${PORT}:${PORT}
-
+  pic_backend:
+    build:
+      context: ./backend
+      target: dev
+    restart: always
+    environment:
+      - PORT=${PORT}
+      - BULL_URL=${BULL_URL}
+      - PG_URL=${PG_URL}
+    env_file:
+      - ./env/backend.env
+    volumes:
+      - ./backend:/src
+    ports:
+      - ${PORT}:${PORT}
   # redis:
   #   image: redis:7
   #   build: ./redis
