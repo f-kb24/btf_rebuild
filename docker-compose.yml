@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres:14.4
+    restart: always
+    volumes:
+      - ./db_data:/var/lib/postgresql/db_data
+    environment:
+      - PGPORT=${PG_PORT}
+    env_file:
+      - ./env/database.env
+    ports:
+      - ${PG_PORT}:${PG_PORT}
+  # bull:
+  #   build: ./bull
+  #   restart: always
+  #   volumes:
+  #     - ./bull:/src
+  #   env_file:
+  #     - ./env/bull.env
+  #   environment:
+  #     - BULL_URL=${BULL_URL}
+  #     - PG_URL=${PG_URL}
+  #     - TZ=America/Los_Angeles
+
+  # directory:
+  #   build:
+  #     context: ./directory
+  #     target: dev
+  #   restart: always
+  #   environment:
+  #     - PORT=${PORT}
+  #     - BULL_URL=${BULL_URL}
+  #     - PG_URL=${PG_URL}
+  #   env_file:
+  #     - ./env/directory.env
+  #   volumes:
+  #     - ./directory:/src
+  #   ports:
+  #     - ${PORT}:${PORT}
+
+  # redis:
+  #   image: redis:7
+  #   build: ./redis
+  #   volumes:
+  #     - ./redis/redis_data:/data
